@@ -197,32 +197,37 @@
     position: fixed;
     top: 0;
     transform: translateX(-100%);
-    @mixin transition transform, var(--ifm-transition-fast), ease;
+    @mixin transition transform, 0.15s cubic-bezier(0.65, 0.3, 0.35, 0.95);
     width: var(--ifm-navbar-sidebar-width);
     overflow: auto;
 
     &--show {
       ^& {
         transform: translateX(0);
+        @mixin transition transform, 0.4s cubic-bezier(0.2, 0.9, 0, 1);
       }
 
       ^&__backdrop {
         display: block;
+        transition: 0.3s opacity, 0.3s visibility;
       }
     }
 
     @media (--ifm-narrow-window) {
-      display: block;
+      opacity: 1;
+      visibility: visible;
     }
 
     &__backdrop {
       background-color: rgba(0, 0, 0, 0.6);
       bottom: 0;
-      display: none;
+      opacity: 0;
+      visibility: hidden;
       left: 0;
       right: 0;
       position: fixed;
       top: 0;
+      transition: 0.15s opacity, 0.15s visibility;
     }
 
     &__brand {
